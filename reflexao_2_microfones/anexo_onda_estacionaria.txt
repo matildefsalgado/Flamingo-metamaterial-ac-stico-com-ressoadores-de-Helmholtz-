@@ -1,0 +1,36 @@
+ANEXO: ESPAÇAMENTO DAS RESSONÂNCIAS DE UM TROÇO DE TUBO (reflexão e onda estacionária)
+=====================================================================================
+
+Frase para o texto principal
+----------------------------
+A ondulação repete-se a cada Δf = 100 Hz; como as ressonâncias de um troço de comprimento L estão
+espaçadas de c/2L (Apêndice B), isto corresponde a L = 1,72 m, o comprimento do tubo inteiro, e não
+à distância microfone–tampão (1,555 m, que daria 111 Hz).
+
+
+B.x Espaçamento das ressonâncias de um troço de tubo
+----------------------------------------------------
+Uma onda que percorre um troço de comprimento L e volta faz um percurso de 2L. Fica em fase consigo
+própria quando nesse percurso cabe um número inteiro de comprimentos de onda, 2L = n·λ. Com λ = c/f,
+as ressonâncias ficam em f_n = n·c/(2L), e duas ressonâncias seguidas estão separadas de
+Δf = c/(2L). Com c = 344,4 m/s, o tubo inteiro (L = 1,75 m) dá Δf = 98 Hz, e o troço
+microfone–tampão (d = 1,555 m) dá 111 Hz. Invertendo com o valor medido,
+L = c/(2Δf) = 344,4/(2 × 100) = 1,72 m.
+
+
+Os cálculos passo a passo
+-------------------------
+1. Condição: numa ida e volta o som percorre 2L e fica em fase quando 2L = n·λ.
+2. Com λ = c/f:  2L = n·c/f   =>   f_n = n·c/(2L)   =>   Δf = f_(n+1) − f_n = c/(2L)
+3. Números (c = 344,4 m/s, T = 22 °C):
+     tubo inteiro       L = 1,75 m     Δf = 344,4 / (2 × 1,75)  = 98 Hz
+     microfone–tampão   d = 1,555 m    Δf = 344,4 / (2 × 1,555) = 111 Hz
+4. Ao contrário, com o medido (Δf = 100 Hz):
+     L = c/(2Δf) = 344,4 / (2 × 100) = 1,72 m
+   Fica perto dos 1,75 m do tubo e longe dos 1,555 m do troço microfone–tampão: a ondulação vem do
+   tubo inteiro, com o som a refletir no tampão e também no altifalante.
+
+O Δf = 100 Hz é calculado por reflexao.py (autocorrelação da curva A_LEGO / A_lã na posição 1) e
+aparece no gráfico "Onda estacionária" de reflexao.png. No gráfico "A mesma curva contra d/λ" as
+linhas verticais marcam d/λ = 0, ½, 1, ... (picos esperados se a ondulação viesse do troço
+microfone–tampão); os picos medidos não caem nelas.

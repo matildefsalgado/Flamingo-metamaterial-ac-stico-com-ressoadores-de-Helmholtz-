@@ -218,3 +218,9 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Gravações e projetos do Audacity (pesados: ficam fora do repositório, ver README)
+*.wav
+*.aup3
+*.aup3-shm
+*.aup3-wal

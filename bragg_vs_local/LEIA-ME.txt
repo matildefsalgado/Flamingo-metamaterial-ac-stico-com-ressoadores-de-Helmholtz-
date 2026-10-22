@@ -1,0 +1,147 @@
+BRAGG vs RESSONÂNCIA LOCAL
+==========================
+
+Esta pasta junta as três partes da mesma experiência (antes em Bragg_vs_local,
+separacao_local_bragg e fusao_bandas):
+
+  tl_parteA.py   fusão, 5 seringas a 4,1 mL (f0 ≈ fB), 13/10        -> tl_parteA_so_fusao.png
+  separacao.py   separação, 5 seringas a 5 mL, 16/10                -> separacao.png
+  fusao.py       fusão a 11,1 mL (aula 3, 12/10), tentativa anterior -> fusao.png
+
+As gravações das três partes têm nomes diferentes e ficam todas nesta pasta.
+
+
+1. FUSÃO A 4,1 mL (tl_parteA.py)
+################################
+AS GRAVAÇÕES
+------------
+Nesta pasta (aula de 13/10, 44,1 kHz):
+fusao_ref.wav          As 5 seringas montadas, êmbolos todos no fundo, lã na ponta.
+                       É a base: o som sem nenhuma seringa a atuar.
+fusao1/2/3.wav         As 5 seringas a 4,1 mL (f0 ≈ fB previsto), lã na ponta. 3 repetições.
+Da pasta numero_elementos (aula 3, 48 kHz), para comparar com as seringas separadas:
+A_ref_Aula3.wav + dependencia_N5-1/2/3.wav   (5 seringas a 14,6 mL)
+   ATENÇÃO: estes N5 foram apagados. Sem eles o código salta a parte das separadas,
+   calcula δ contra o fB PREVISTO e guarda a figura em tl_parteA_so_fusao.png.
+Teto: vem da pasta teto_sistema (gravado a 7/10, outra sessão: só indicativo).
+
+
+O QUE O CÓDIGO FAZ (tl_parteA.py), PASSO A PASSO
+-----------------------------------------------
+1. Calcula as previsões a partir dos valores no topo do código (T, a, V, gargalo cónico):
+       f0 = (c / 2π) × √( S / ((V + V_cone) × L_ef) )   (≈ 672 Hz a 4,1 mL)
+       fB = c / (2 × a)                                  (≈ 689 Hz com a = 0,25 m, T = 22 °C)
+   e as incertezas, em quadratura:
+       (δf0/f0)² = (δc/c)² + ¼(δS/S)² + ¼(δV/V_total)² + ¼(δL_ef/L_ef)²
+       (δfB/fB)² = (δc/c)² + (δa/a)²
+   com δT = 0,5 °C, δV = 0,5 mL (metade de 1 mL), δR = 0,1 mm, δL_ef = 2,5 mm (calibração), δa = 1 mm.
+2. Calcula a amplitude, frequência a frequência, de cada gravação e põe tudo numa
+   grelha comum de 10 Hz (as duas sessões têm taxas de amostragem diferentes).
+3. TL = 20 × log10( A_ref / A_medida ), cada medição com a referência da sua sessão;
+   média e desvio padrão das 3 repetições.
+4. Ressonância local: máximo do TL da fusão perto do f0 previsto. Incerteza = desvio padrão
+   da média dos picos das 3 repetições e metade da resolução (5 Hz), em quadratura.
+   Compara com o previsto pelo z = |medido − previsto| / √(σ_medido² + σ_previsto²).
+   Bragg: máximo do TL das separadas acima de fB (a banda sai deslocada para cima).
+5. Larguras da zona contínua com TL >= 6 dB e >= 10 dB à volta da ressonância local.
+6. Dessintonia δ = (fB − f0) / fB, contra o fB medido (se houver as separadas) e contra o
+   fB previsto, com incerteza propagada e o z contra 0.
+7. Procura o pico de Bragg (maior pico entre f0 + 40 Hz e 1,2 fB: 730 ± 5 Hz) e calcula o modelo
+   de matrizes de transferência com o f0 medido e Q = 13.
+8. Desenha o TL, o modelo, o f0 previsto e o fB, e guarda em tl_parteA_so_fusao.png.
+   O estilo (escalas 300–1100 Hz e −15 a 35 dB, cores, anotações) está em ../estilo_tl.py,
+   o mesmo da separação (separacao.py), para as figuras serem comparáveis.
+   O teto e as linhas de 6 e 10 dB já não se desenham (o teto é de outra sessão); as larguras
+   a 6 e 10 dB continuam a ser escritas no terminal.
+
+
+2. SEPARAÇÃO A 5 mL (separacao.py)
+##################################
+Uso:  python separacao.py
+      python separacao.py --pasta <outra pasta>     (se as gravações estiverem noutro sítio)
+
+AS GRAVAÇÕES (nesta pasta, TODAS NA MESMA SESSÃO, sem mexer no gerador nem no ganho)
+  ref_1.wav, ref_2.wav, ...          êmbolos todos no fundo, lã na ponta          (referência)
+  sep5mL_1.wav, sep5mL_2.wav, ...    as 5 seringas a 5 mL, lã na ponta            (3 repetições)
+  ctrl5mL_1.wav, ctrl5mL_2.wav, ...  só a seringa 1 a 5 mL, as outras no fundo   (controlo, 3 repetições)
+Também aceita "-" em vez de "_", o " (1)" que o Windows acrescenta e os nomes usados a 16/10
+(ref16_10.wav, sep_bandas1.wav, ...).
+Audacity a 48 kHz, mono, varrimento de 100 a 2000 Hz.
+Ponham no topo do código a temperatura da sessão (T).
+
+Porquê o controlo: uma seringa sozinha não tem Bragg. Se o pico a ~700 Hz aparecer com 5 seringas
+e não com 1, na mesma sessão e com a mesma referência, é Bragg e não a ondulação do tubo (~100 Hz,
+ressonância do tubo inteiro). Sem o controlo o script corre, mas não prova que o 2.º pico é Bragg.
+
+Porquê 5 mL: na fusão (4,1 mL) os picos já estavam separados de ~110 Hz (620 e 730 Hz). A 5 mL
+a ressonância local desce para ~575 Hz (o previsto é 624 Hz, mas na fusão o f0 medido ficou 8 %
+abaixo) e o pico de Bragg deve ficar no mesmo sítio, porque só depende do espaçamento. Com mais
+volume os picos afastam-se mais, mas o Bragg enfraquece (o modelo dá ~4 dB a 5 mL, ~3 dB a 6 mL).
+
+O QUE O CÓDIGO FAZ
+  1. f0 previsto a 5 mL e fB = c/2a, com incerteza (mesmas incertezas de entrada dos outros scripts).
+  2. TL(f) = 20·log10(A_ref/A) de cada repetição; média e desvio padrão. Com várias referências
+     usa a média delas.
+  3. Ressonância local: maior pico entre 0,75 f0 previsto e fB − 30 Hz.
+     Pico de Bragg: maior pico entre (ressonância local + 40 Hz) e 1,2 fB.
+     Incerteza de cada frequência: dispersão entre repetições (s/√n) e metade da resolução (5 Hz),
+     em quadratura. z contra o previsto. Separação entre os picos e altura do Bragg acima do mínimo.
+  4. Controlo: TL de 1 seringa à frequência do pico de Bragg; diferença 5 − 1 seringas com
+     incerteza e z contra 0 (z > 3: o pico é da rede).
+  5. Modelo de matrizes de transferência com o f0 medido; o Q é escolhido para o pico do modelo com
+     1 seringa ter a altura do pico do controlo (sem controlo usa Q = 13, do N1 da aula 3).
+  6. Comparação com a fusão (tl_parteA.py, nesta pasta, 4,1 mL): quanto se deslocou cada pico. A ressonância
+     local deve descer ~47 Hz e o pico de Bragg deve ficar parado. (A fusão é de outra sessão.)
+  7. Figura separacao.png: 5 seringas, controlo, modelo, f0 previsto e fB.
+     O estilo (escalas 300–1100 Hz e −15 a 35 dB, cores, anotações) e o modelo estão em
+     ../estilo_tl.py, partilhado com tl_parteA.py, para as figuras serem comparáveis.
+     O teto de 7/10 já não se desenha: é de outra sessão e a ~610 Hz fica abaixo dos picos medidos.
+
+A versão antiga (N5 a 14,6 mL) foi substituída: a esse volume o Bragg vale ~1 dB e não se vê.
+
+RESULTADOS (16/10/2026: ref16_10.wav + sep_bandas1-3.wav, 44,1 kHz, sem controlo)
+  Ressonância local: 600 ± 5 Hz, TL = 25,6 ± 3,3 dB (previsto 624 ± 35 Hz, z = 0,7).
+  Mínimo entre os dois: 650 Hz, TL = 1,9 dB.
+  Pico de Bragg: 690 ± 5 Hz, TL = 13,7 ± 0,2 dB (fB = 689 ± 3 Hz, z = 0,2); 11,8 dB acima do mínimo.
+  Modelo (f0 = 600 Hz, Q = 13): Bragg a 688 Hz com 5,7 dB (posição certa, altura mais baixa que a medida).
+  Comparação com a fusão: local 620 -> 600 Hz (−20 ± 8; previsto −47, mas só a leitura de ±0,5 mL em
+  cada volume dá ±37 Hz nesta diferença); Bragg 730 -> 690 Hz (previsto 0).
+  Há outro pico a ~490 Hz (14 dB), que na fusão estava a ~540 Hz: mexe-se com o volume, por isso vem
+  das seringas e não é Bragg; causa por esclarecer.
+  Falta o controlo (1 seringa a 5 mL, mesma sessão) para excluir a ondulação do tubo a 690 Hz.
+
+
+3. FUSÃO A 11,1 mL (fusao.py)
+#############################
+AS GRAVAÇÕES
+--------------------------
+A_ref_Aula3.wav        (na pasta numero_elementos) As 5 seringas montadas, êmbolos todos no fundo, lã na ponta.
+                       É a base: o som sem nenhuma seringa a atuar.
+fusao_11-1mL_1/2/3.wav As 5 seringas a 11,1 mL, lã na ponta. 3 repetições.
+fusao_5mL_1/2/3.wav    As 5 seringas a 5 mL (o mais perto da fusão), lã na ponta.
+                       Outros volumes: fusao_<V>mL_<n>.wav (vírgula como '-').
+                       O código faz a média das repetições de cada volume.
+Picos separados: A_ref.wav e A_40mL.wav (40 mL) nesta pasta. Já não existem: o código salta essa parte.
+Teto: vem da pasta teto_sistema (A_ref, A_silencio, A_fuga de lá).
+
+
+O QUE O CÓDIGO FAZ, PASSO A PASSO
+--------------------------------
+1. Calcula a partir dos valores no topo do código (T, a, r, L, ΔL):
+       c  = 331,3 × √(1 + T/273,15)
+       fB = c / (2 × a)
+       V sintonizado = S × a² / (π² × L_ef)
+   e o f0 previsto para o volume que puseram (V_USADO).
+2. Calcula a amplitude, frequência a frequência (de 10 em 10 Hz),
+   das gravações e do teto.
+3. Calcula a atenuação da fusão:
+       TL = 20 × log10( A_ref / A_fusao )   [dB], para cada repetição, e faz a média
+4. Procura o máximo de TL perto do f0 previsto e perto de fB (±100 Hz).
+5. Mede a largura da banda a 10 dB: anda para a esquerda e para a direita
+   a partir do máximo enquanto TL ≥ 10 dB, e interpola onde cruza os 10 dB.
+6. Faz o mesmo para os picos separados (40 mL), um à volta de f0 e outro à volta de fB.
+7. Avisa se algum pico está cortado pelo teto ou se o teto desce abaixo de 13 dB
+   dentro da banda.
+8. Escreve a razão  largura da fusão / largura do pico separado.
+9. Desenha as duas curvas (separados e fusão), o teto, a linha dos 10 dB
+   e a largura da banda sombreada, e guarda em fusao.png.

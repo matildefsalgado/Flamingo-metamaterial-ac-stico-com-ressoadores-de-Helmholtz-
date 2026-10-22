@@ -21,7 +21,7 @@ Análise das medições de um metamaterial acústico: um tubo de PVC com cinco s
 
 `estilo_tl.py` tem o estilo comum dos gráficos de TL, o modelo de matrizes de transferência e o cálculo do teto, que vários scripts usam.
 
-Cada pasta tem um `README.md` curto e um `READ-ME.txt` com o protocolo e o passo a passo do código.
+Cada pasta tem um `README.md` com o resumo da experiência, as gravações e o passo a passo do código.
 
 ## Dependências
 

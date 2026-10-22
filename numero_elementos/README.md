@@ -12,4 +12,59 @@ O teto vem de `../teto_sistema/`.
 
 **Parâmetros:** grelha de 10 Hz e pico procurado entre 0,75 e 1,35 × f0. As duas sessões não têm medição de ponte, e o ajuste dá χ²/ν = 3,6.
 
-Detalhes em `READ-ME.txt`.
+## Passo a passo do código
+
+```text
+DEPENDÊNCIA COM O NÚMERO DE SERINGAS (N = 1 a 5)
+================================================
+
+AS GRAVAÇÕES (nesta pasta)
+--------------------------
+A_ref_Aula3.wav          Todos os êmbolos no fundo (nenhuma seringa ativa), lã na ponta.
+                         É a base: o som sem nenhuma seringa a atuar.
+dependencia_N1-1.wav ... Só a seringa 1 a 14,6 mL; as outras com o êmbolo no fundo.
+dependencia_N2-1.wav ... Seringas 1 e 2 a 14,6 mL.
+dependencia_N3-1.wav ... Seringas 1, 2 e 3 a 14,6 mL.
+                         O número depois do - é a repetição (1, 2, 3).
+Também aceita nomes N4_1.wav, N4-1.wav, etc.
+Tudo com o mesmo ganho, volume do altifalante, varrimento e microfone.
+
+DUAS SESSÕES (cada uma com a SUA referência):
+  aula 3 (12/10):  A_ref_Aula3.wav            + dependencia_N1..N3-<rep>.wav
+  14/10:           referencia_14-10 (1).wav   + dependencia_N4/N5-<rep>_nova.wav
+                   (a mesma referência da pasta distancia_altifalante: mesma sessão)
+Os N4 e N5 antigos (outra sessão, sem referência própria) foram retirados.
+Teto: vem da pasta teto_sistema (A_ref, A_silencio, A_fuga de lá).
+
+
+O QUE O CÓDIGO FAZ, PASSO A PASSO
+--------------------------------
+1. Calcula a partir dos valores no topo do código (T, a, r, L, ΔL, V):
+       c  = 331,3 × √(1 + T/273,15)
+       f0 = (c/2π) × √(S / (V × L_ef))
+       fB = c / (2 × a)
+   e as incertezas de f0 e fB por causa do volume (0,5 mL), da posição (1 mm)
+   e da temperatura (0,5 °C), dos raios do cone (0,1 mm) e de L_ef (2,5 mm, da calibração),
+   tudo em quadratura.
+2. Calcula a amplitude, frequência a frequência (de 10 em 10 Hz), de cada
+   gravação, deitando fora os pedaços saturados.
+3. Para cada gravação:
+       TL = 20 × log10( A_ref / A_N )     [dB]
+   e faz a média das repetições de cada N.
+4. Procura o máximo de TL só à volta do f0 (0,75 a 1,35 × f0), para não apanhar o Bragg.
+   Incerteza = desvio padrão da média das repetições.
+5. Mede a largura da banda a 10 dB: anda para a esquerda e para a direita a partir
+   do máximo enquanto TL ≥ 10 dB e interpola onde cruza os 10 dB.
+   Incerteza = dispersão das repetições + resolução (10 Hz) + volume e posição
+   (divididos por √N) + temperatura.
+6. Mede a inclinação das duas margens da banda (dB/Hz) onde cruzam os 10 dB.
+7. Avisa os N cujo máximo está a menos de 3 dB do teto.
+8. Ajusta TL máx = k × N + b só com os N longe do teto e escreve k (dB por seringa)
+   e o χ²/ν, para ver se o crescimento é linear (perto de 1: a reta descreve os pontos
+   dentro das barras de erro). Se χ²/ν > 1, as incertezas de k e b são multiplicadas por √(χ²/ν).
+9. Desenha e guarda em tl_vs_N.png:
+       - as curvas TL(f) de todos os N, com o teto, f0 e fB;
+       - TL máx vs N, com o ajuste (pontos perto do teto a branco);
+       - largura a 10 dB vs N.
+   (A inclinação das margens continua a ser escrita na tabela, mas já não tem gráfico.)
+```

@@ -145,7 +145,7 @@ print(f"   (na fusão o f0 medido ficou 8 % abaixo do previsto: a 5 mL espera-se
 refs, meds, ctrls = ficheiros(PADRAO_REF), ficheiros(PADRAO_MED), ficheiros(PADRAO_CTRL)
 if not refs or not meds:
     raise SystemExit(f"Faltam gravações em {PASTA_DADOS}: preciso de {PADRAO_REF}_1.wav, ... "
-                     f"e {PADRAO_MED}_1.wav, ... (ver READ-ME).")
+                     f"e {PADRAO_MED}_1.wav, ... (ver README.md).")
 print(f"\nReferência: {', '.join(refs)}\nMedidas:    {', '.join(meds)}"
       + (f"\nControlo:   {', '.join(ctrls)}" if ctrls else "\nControlo:   (não há: sem ele não se prova que o 2.º pico é Bragg)"))
 TL5, sd5, reps5 = tl(refs, meds, PASTA_DADOS)

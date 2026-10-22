@@ -31,16 +31,6 @@ Python 3.10 ou mais recente.
 pip install -r requirements.txt
 ```
 
-## Dados
-
-As gravações (`.wav`, Audacity, mono, 44,1 ou 48 kHz) não estão no repositório porque ocupam cerca de 200 MB.
-
-**Link para as gravações:** _(a acrescentar)_
-
-Cada script lê as gravações da **própria pasta**. Depois de as descarregar, põe cada `.wav` na pasta com o mesmo nome. O README de cada pasta diz que ficheiros são precisos.
-
-Alguns scripts também usam gravações de outras pastas: o teto vem de `teto_sistema/` e a referência da aula 3 vem de `numero_elementos/`. Por isso convém descarregar tudo.
-
 ## Como correr
 
 Dentro da pasta da experiência:

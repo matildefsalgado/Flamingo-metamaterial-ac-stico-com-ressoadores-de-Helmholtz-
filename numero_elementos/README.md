@@ -12,4 +12,4 @@ O teto vem de `../teto_sistema/`.
 
 **Parâmetros:** grelha de 10 Hz e pico procurado entre 0,75 e 1,35 × f0. As duas sessões não têm medição de ponte, e o ajuste dá χ²/ν = 3,6.
 
-Detalhes em `LEIA-ME.txt`.
+Detalhes em `READ-ME.txt`.

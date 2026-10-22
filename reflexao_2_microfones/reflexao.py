@@ -393,7 +393,12 @@ def main():
     for nome, a_ in separados.items():
         if a_.axison:
             caixa = a_.get_tightbbox(rend).transformed(fig.dpi_scale_trans.inverted()).padded(0.1)
+            outros = [o for o in fig.axes if o is not a_ and o.get_visible()]
+            for o in outros:   # esconde os vizinhos, para não apanhar bocados dos títulos deles
+                o.set_visible(False)
             fig.savefig(os.path.join(pasta, nome), dpi=150, bbox_inches=caixa)
+            for o in outros:
+                o.set_visible(True)
     print("\nFiguras: reflexao.png e, em separado, " + ', '.join(separados))
 
 

@@ -115,7 +115,7 @@ def gargalo(N):
     v = GARGALO.get(N, V)
     L_ef = L + dL
     if v == 'fusao':
-        # f0 = fB  ->  V = S·a² / (π²·L_ef) - V_cone  (como em bragg_vs_local/fusao.py)
+        # f0 = fB  ->  V = S·a² / (π²·L_ef) - V_cone
         v = S * a**2 / (np.pi**2 * L_ef) - V_CONE
     return D_PONTA, U_D, v, S, L_ef
 
@@ -202,14 +202,6 @@ for p in sorted(glob.glob(os.path.join(PASTA, '*.wav'))):
     TL_por_N[N].append(20 * np.log10(A_refs[sessao] / np.maximum(A[idx], eps)))
 A_ref = A_refs.get('aula 3', next(iter(A_refs.values())))
 
-# N = 5: as gravações da pasta bragg_vs_local (fusao_<V>mL_<n>.wav) com o mesmo volume são exatamente "5 seringas ativas"
-# (mesma aula, mesma referência). Só entram se não houver N5 nesta pasta.
-if 5 not in TL_por_N:
-    v_txt = f"{V * 1e6:g}".replace('.', '-')
-    for p in sorted(glob.glob(os.path.join(PASTA, '..', 'bragg_vs_local', f'fusao_{v_txt}mL_*.wav'))):
-        sr, _, A = espectro(os.path.basename(p), os.path.dirname(p))
-        TL_por_N[5].append(20 * np.log10(A_ref / np.maximum(A[idx], eps)))
-        print(f"N = 5 tirado de bragg_vs_local: {os.path.basename(p)}")
 if not TL_por_N:
     raise SystemExit("Não encontrei ficheiros N<n>_<rep>.wav nesta pasta.")
 

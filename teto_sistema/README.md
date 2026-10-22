@@ -8,4 +8,4 @@
 
 **Parâmetros:** Welch com segmentos de 0,1 s (resolução de 10 Hz), entre 100 e 2000 Hz. Este teto é de outra sessão: nos outros scripts serve só de indicação.
 
-Detalhes em `LEIA-ME.txt`.
+Detalhes em `READ-ME.txt`.

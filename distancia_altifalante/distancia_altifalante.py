@@ -310,6 +310,18 @@ def main():
     estilo_tl.virgulas(fig)
     fig.tight_layout()
     fig.savefig(os.path.join(pasta, 'f0_vs_distancia.png'), dpi=150)
+    # cada gráfico também num ficheiro à parte, para se poder referir a eles separadamente
+    fig.canvas.draw()
+    rend = fig.canvas.get_renderer()
+    for nome, a_ in (('posicao_a_TL.png', ax[0, 0]), ('posicao_b_f0.png', ax[0, 1]),
+                     ('posicao_c_TL_maximo.png', ax[1, 0]), ('posicao_d_Q.png', ax[1, 1])):
+        caixa = a_.get_tightbbox(rend).transformed(fig.dpi_scale_trans.inverted()).padded(0.1)
+        outros = [o for o in fig.axes if o is not a_ and o.get_visible()]
+        for o in outros:   # esconde os vizinhos, para não apanhar bocados dos títulos deles
+            o.set_visible(False)
+        fig.savefig(os.path.join(pasta, nome), dpi=150, bbox_inches=caixa)
+        for o in outros:
+            o.set_visible(True)
     print("\nFigura: f0_vs_distancia.png")
 
 

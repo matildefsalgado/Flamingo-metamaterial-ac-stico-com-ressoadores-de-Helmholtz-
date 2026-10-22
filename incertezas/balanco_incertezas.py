@@ -3,7 +3,7 @@ import re
 import sys
 import numpy as np
 
-# Orçamento de incertezas para o Apêndice C do relatório.
+# Balanço de incertezas para o Apêndice C do relatório.
 # Para cada grandeza principal: a contribuição de cada fonte (em Hz ou mm e em %) e a total,
 # somadas em quadratura (fontes independentes). Escreve uma tabela no terminal e o ficheiro
 # tabela_incertezas.tex (booktabs) para o Overleaf.
@@ -128,7 +128,7 @@ def tex(s):
 
 
 linhas = [r'\begin{table}[h]', r'\centering', r'\small',
-          r'\caption{Orçamento de incertezas: contribuição de cada fonte e total em quadratura.}',
+          r'\caption{Balanço de incertezas: contribuição de cada fonte e total em quadratura.}',
           r'\label{tab:incertezas}', r'\begin{tabular}{lrr}', r'\toprule',
           r'Fonte & Contribuição & Relativa \\', r'\midrule']
 for b in blocos:
@@ -181,7 +181,7 @@ for i, (txt, contr, rel, tipo) in enumerate(filas, start=1):
     ax.text(X_CONTR, y, contr, style=estilo, va='center', ha='right')
     ax.text(X_REL, y, rel, style=estilo, va='center', ha='right')
 ax.axhline(len(filas) + 0.75, color='black', linewidth=1.2)
-ax.set_title('Orçamento de incertezas: contribuição de cada fonte e total em quadratura', fontsize=11)
+ax.set_title('Balanço de incertezas: contribuição de cada fonte e total em quadratura', fontsize=11)
 fig.tight_layout()
 fig.savefig(os.path.join(PASTA, 'tabela_incertezas.png'), dpi=150)
 print("Imagem: tabela_incertezas.png")

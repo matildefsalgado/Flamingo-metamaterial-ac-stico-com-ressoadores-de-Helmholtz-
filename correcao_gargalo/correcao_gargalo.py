@@ -146,6 +146,7 @@ def main():
     ax1.set_title(f"Perda por insercao, 1 ressonador (media de 3)\nref: {nome_ref}")
     ax1.grid(alpha=0.3)
     ax1.legend()
+    estilo_tl.virgulas(fig1)
     fig1.tight_layout()
     fig1.savefig(os.path.join(AQUI, "IL_por_volume" + ("_Aref" if args.ref else "") + ".png"), dpi=150)
 

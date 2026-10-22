@@ -1,7 +1,7 @@
-ORÇAMENTO DE INCERTEZAS (Apêndice C do relatório)
+BALANÇO DE INCERTEZAS (Apêndice C do relatório)
 =================================================
 
-Uso:  python orcamento_incertezas.py
+Uso:  python balanco_incertezas.py
 
 Para cada grandeza principal escreve a contribuição de cada fonte (em Hz ou mm e em %)
 e a total em quadratura, e diz qual domina:

@@ -10,4 +10,4 @@
 
 **Parâmetros:** D_MIC_PAREDE = 155,5 cm, tubo de 25 mm de diâmetro interior e resolução de cerca de 1,5 Hz. Há uma só gravação por varrimento, e a posição do microfone nos tons está por confirmar. A análise da onda estacionária está em `anexo_onda_estacionaria.txt`.
 
-Detalhes em `LEIA-ME.txt`.
+Detalhes em `READ-ME.txt`.

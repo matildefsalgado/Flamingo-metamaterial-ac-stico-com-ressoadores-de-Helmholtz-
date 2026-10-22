@@ -8,4 +8,4 @@
 
 **Parâmetros:** V = 14,6 mL, espaçamento a = 0,25 m, resolução de cerca de 1,5 Hz e pico procurado em f0 previsto ± 35 %.
 
-Detalhes em `LEIA-ME.txt`.
+Detalhes em `READ-ME.txt`.

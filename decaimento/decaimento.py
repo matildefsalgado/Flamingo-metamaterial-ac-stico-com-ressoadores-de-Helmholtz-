@@ -184,7 +184,7 @@ else:
     ns, nc = ficheiros(PADRAO_SER), ficheiros(PADRAO_CTRL)
     if not ns:
         raise SystemExit(f"Faltam gravações em {PASTA_DADOS}: preciso de {PADRAO_SER}_1.wav, ... "
-                         f"(e {PADRAO_CTRL}_1.wav, ... para o controlo). Ver LEIA-ME.")
+                         f"(e {PADRAO_CTRL}_1.wav, ... para o controlo). Ver READ-ME.")
     grav_s = [(n, *ler(n)) for n in ns]
     grav_c = [(n, *ler(n)) for n in nc]
 

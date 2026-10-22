@@ -10,4 +10,4 @@
 
 **Parâmetros:** filtro de f0 ± 150 Hz, envolvente de Hilbert suavizada a 1 ms e ajuste de −3 a −25 dB. Resultado: τ da seringa ≈ τ do controlo ≈ 19 ms, por isso o decaimento é do tubo e só se pode dizer que Q < 26.
 
-Detalhes em `LEIA-ME.txt`.
+Detalhes em `READ-ME.txt`.

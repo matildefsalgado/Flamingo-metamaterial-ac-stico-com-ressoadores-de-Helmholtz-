@@ -1,14 +1,13 @@
 BRAGG vs RESSONÂNCIA LOCAL
 ==========================
 
-Esta pasta junta as três partes da mesma experiência (antes em Bragg_vs_local,
-separacao_local_bragg e fusao_bandas):
+Esta pasta junta as duas partes da mesma experiência (antes em Bragg_vs_local e
+separacao_local_bragg):
 
   tl_parteA.py   fusão, 5 seringas a 4,1 mL (f0 ≈ fB), 13/10        -> tl_parteA_so_fusao.png
   separacao.py   separação, 5 seringas a 5 mL, 16/10                -> separacao.png
-  fusao.py       fusão a 11,1 mL (aula 3, 12/10), tentativa anterior -> fusao.png
 
-As gravações das três partes têm nomes diferentes e ficam todas nesta pasta.
+As gravações das duas partes têm nomes diferentes e ficam todas nesta pasta.
 
 
 1. FUSÃO A 4,1 mL (tl_parteA.py)
@@ -109,39 +108,3 @@ RESULTADOS (16/10/2026: ref16_10.wav + sep_bandas1-3.wav, 44,1 kHz, sem controlo
   Há outro pico a ~490 Hz (14 dB), que na fusão estava a ~540 Hz: mexe-se com o volume, por isso vem
   das seringas e não é Bragg; causa por esclarecer.
   Falta o controlo (1 seringa a 5 mL, mesma sessão) para excluir a ondulação do tubo a 690 Hz.
-
-
-3. FUSÃO A 11,1 mL (fusao.py)
-#############################
-AS GRAVAÇÕES
---------------------------
-A_ref_Aula3.wav        (na pasta numero_elementos) As 5 seringas montadas, êmbolos todos no fundo, lã na ponta.
-                       É a base: o som sem nenhuma seringa a atuar.
-fusao_11-1mL_1/2/3.wav As 5 seringas a 11,1 mL, lã na ponta. 3 repetições.
-fusao_5mL_1/2/3.wav    As 5 seringas a 5 mL (o mais perto da fusão), lã na ponta.
-                       Outros volumes: fusao_<V>mL_<n>.wav (vírgula como '-').
-                       O código faz a média das repetições de cada volume.
-Picos separados: A_ref.wav e A_40mL.wav (40 mL) nesta pasta. Já não existem: o código salta essa parte.
-Teto: vem da pasta teto_sistema (A_ref, A_silencio, A_fuga de lá).
-
-
-O QUE O CÓDIGO FAZ, PASSO A PASSO
---------------------------------
-1. Calcula a partir dos valores no topo do código (T, a, r, L, ΔL):
-       c  = 331,3 × √(1 + T/273,15)
-       fB = c / (2 × a)
-       V sintonizado = S × a² / (π² × L_ef)
-   e o f0 previsto para o volume que puseram (V_USADO).
-2. Calcula a amplitude, frequência a frequência (de 10 em 10 Hz),
-   das gravações e do teto.
-3. Calcula a atenuação da fusão:
-       TL = 20 × log10( A_ref / A_fusao )   [dB], para cada repetição, e faz a média
-4. Procura o máximo de TL perto do f0 previsto e perto de fB (±100 Hz).
-5. Mede a largura da banda a 10 dB: anda para a esquerda e para a direita
-   a partir do máximo enquanto TL ≥ 10 dB, e interpola onde cruza os 10 dB.
-6. Faz o mesmo para os picos separados (40 mL), um à volta de f0 e outro à volta de fB.
-7. Avisa se algum pico está cortado pelo teto ou se o teto desce abaixo de 13 dB
-   dentro da banda.
-8. Escreve a razão  largura da fusão / largura do pico separado.
-9. Desenha as duas curvas (separados e fusão), o teto, a linha dos 10 dB
-   e a largura da banda sombreada, e guarda em fusao.png.

@@ -14,14 +14,14 @@ Análise das medições de um metamaterial acústico: um tubo de PVC com cinco s
 | `correcao_gargalo/` | Calibração do gargalo: f0 em função do volume da seringa, comprimento efetivo L_ef e correção ΔL |
 | `numero_elementos/` | Atenuação (TL) e largura da banda em função do número de seringas ativas (N = 1 a 5) |
 | `distancia_altifalante/` | Ressonância de uma seringa em função da distância ao altifalante |
-| `bragg_vs_local/` | Ressonância local vs. Bragg: fusão a 4,1 mL, separação a 5 mL e fusão a 11,1 mL |
+| `bragg_vs_local/` | Ressonância local vs. Bragg: fusão a 4,1 mL e separação a 5 mL |
 | `reflexao_2_microfones/` | Reflexão de uma seringa e ondas estacionárias com a terminação de lã e com a de LEGO |
 | `decaimento/` | Decaimento da ressonância depois de cortar o tom (Q pelo tempo) |
-| `incertezas/` | Orçamento de incertezas (Apêndice C do relatório) |
+| `incertezas/` | Balanço de incertezas (Apêndice C do relatório) |
 
 `estilo_tl.py` tem o estilo comum dos gráficos de TL, o modelo de matrizes de transferência e o cálculo do teto, que vários scripts usam.
 
-Cada pasta tem um `README.md` curto e um `LEIA-ME.txt` com o protocolo e o passo a passo do código.
+Cada pasta tem um `README.md` curto e um `READ-ME.txt` com o protocolo e o passo a passo do código.
 
 ## Dependências
 
@@ -40,4 +40,4 @@ cd numero_elementos
 python tl_vs_N.py
 ```
 
-Cada script escreve os resultados no terminal e guarda as figuras `.png` na mesma pasta. As figuras que estão no repositório são as do relatório.
+Cada script escreve os resultados no terminal e guarda as figuras `.png` na mesma pasta. As figuras não estão no repositório: estão no relatório e são geradas pelos scripts.

@@ -5,13 +5,10 @@ AS GRAVAÇÕES (nesta pasta)
 --------------------------
 A_ref_Aula3.wav          Todos os êmbolos no fundo (nenhuma seringa ativa), lã na ponta.
                          É a base: o som sem nenhuma seringa a atuar.
-                         (Também serve de referência a bragg_vs_local/fusao.py.)
 dependencia_N1-1.wav ... Só a seringa 1 a 14,6 mL; as outras com o êmbolo no fundo.
 dependencia_N2-1.wav ... Seringas 1 e 2 a 14,6 mL.
 dependencia_N3-1.wav ... Seringas 1, 2 e 3 a 14,6 mL.
                          O número depois do - é a repetição (1, 2, 3).
-N = 5: se houver gravações fusao_14-6mL_*.wav na pasta bragg_vs_local (mesmo volume),
-       o código vai buscá-las sozinho.
 Também aceita nomes N4_1.wav, N4-1.wav, etc.
 Tudo com o mesmo ganho, volume do altifalante, varrimento e microfone.
 

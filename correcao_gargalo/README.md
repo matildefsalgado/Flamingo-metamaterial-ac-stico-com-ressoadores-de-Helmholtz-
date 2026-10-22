@@ -10,4 +10,4 @@
 
 **Parâmetros:** a referência é a **mediana dos 15 espectros**, porque a A_ref desse dia tinha flutuações de potência. Resolução de cerca de 1,5 Hz e δV = ±0,5 mL. Resultado: L_ef = 40,7 ± 2,5 mm e ΔL = 5,7 mm. Consoante a referência escolhida, ΔL varia entre 2,4 e 5,7 mm.
 
-Detalhes em `LEIA-ME.txt`.
+Detalhes em `READ-ME.txt`.
